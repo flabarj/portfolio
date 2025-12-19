@@ -4,87 +4,241 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Flávia Ramos</title>
-  <link rel="stylesheet" href="./assets/css/style.css" />
+  <link rel="stylesheet" href="./assets/css/style.css?v=1" />
 </head>
+
 <body>
+  <div class="bg"></div>
 
-<header class="hero">
-  <div class="hero__content">
-    <p class="hero__hello">Oi, eu sou</p>
-    <h1 class="hero__name">Flávia Ramos</h1>
-    <h2 class="hero__tagline">Eu organizo o que está bagunçado.</h2>
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <div class="brand">Flávia Ramos</div>
 
-    <div class="hero__actions">
-      <a href="#contato" class="btn btn--primary">Tem um problema?</a>
-      <a href="./docs/flavia-ramos-cv-pdf.pdf" class="btn btn--ghost" download>
-        Currículo
-      </a>
+      <button id="btnMenu" class="menuBtn" type="button" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav id="nav" class="nav" aria-label="Navegação">
+        <a class="nav__link" href="#home">Home</a>
+        <a class="nav__link" href="#about">About</a>
+        <a class="nav__link" href="#projects">Projects</a>
+        <a class="nav__link" href="#contact">Contacts</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="home" class="container">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero__left">
+        <div class="kicker">Oi, eu sou</div>
+        <h1 class="hero__title">Flávia Ramos</h1>
+
+        <p class="hero__subtitle">Eu organizo o que está bagunçado.</p>
+
+        <div class="hero__actions">
+          <button id="btnProblem" class="btn btn--primary" type="button">
+            Tem um problema?
+          </button>
+
+          <a class="btn btn--ghost" href="./docs/flavia-ramos-cv-pdf.pdf" download>
+            Currículo
+          </a>
+        </div>
+
+        <div class="skillsRow" aria-label="Áreas">
+          <span class="skill">Fluxo de Caixa</span>
+          <span class="skill">Conciliação Automática</span>
+          <span class="skill">Endividamento</span>
+          <span class="skill">Análise Financeira</span>
+          <span class="skill">FP&amp;A</span>
+          <span class="skill">Consolidação</span>
+        </div>
+      </div>
+
+      <div class="hero__right" aria-label="Foto Flávia Ramos">
+        <div class="portrait">
+          <img class="portrait__ring" src="./assets/img/ui/circle-blue.svg" alt="" aria-hidden="true">
+          <img class="portrait__img" src="./assets/img/avatar/flavia.png" alt="Flávia Ramos" />
+
+          <button class="arrow arrow--left" type="button" aria-label="Anterior" disabled>
+            <img src="./assets/img/ui/arrow-left.png" alt="" aria-hidden="true">
+          </button>
+
+          <button class="arrow arrow--right" type="button" aria-label="Próximo" disabled>
+            <img src="./assets/img/ui/arrow-right.png" alt="" aria-hidden="true">
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="about">
+      <div class="about__grid">
+        <div class="about__side">
+          <div class="about__rail" aria-hidden="true"></div>
+
+          <button class="aboutCard" type="button" data-open="p1">
+            <img src="./assets/icons/fluxo-caixa.svg" alt="" aria-hidden="true">
+            <div>
+              <div class="aboutCard__t">Fluxo de Caixa</div>
+              <div class="aboutCard__s">Visão gerencial e rotina</div>
+            </div>
+          </button>
+
+          <button class="aboutCard" type="button" data-open="p2">
+            <img src="./assets/icons/conciliacao.svg" alt="" aria-hidden="true">
+            <div>
+              <div class="aboutCard__t">Conciliação Automática</div>
+              <div class="aboutCard__s">Rastreabilidade e consistência</div>
+            </div>
+          </button>
+
+          <button class="aboutCard" type="button" data-open="p3">
+            <img src="./assets/icons/endividamento.svg" alt="" aria-hidden="true">
+            <div>
+              <div class="aboutCard__t">Endividamento</div>
+              <div class="aboutCard__s">Estrutura, custo e risco</div>
+            </div>
+          </button>
+
+          <button class="aboutCard" type="button" data-open="p4">
+            <img src="./assets/icons/consolidacao.svg" alt="" aria-hidden="true">
+            <div>
+              <div class="aboutCard__t">Consolidação</div>
+              <div class="aboutCard__s">Eliminações e visão consolidada</div>
+            </div>
+          </button>
+        </div>
+
+        <div class="about__main">
+          <h2 class="h2">About me</h2>
+
+          <p class="lead">
+            Atuo na área de controladoria com foco em organizar números, identificar incoerências e transformar dados financeiros
+            em informação clara para decisão. Gosto de pegar processos confusos, planilhas soltas e rotinas manuais e estruturar
+            tudo de forma lógica, rastreável e automatizada.
+          </p>
+
+          <p class="lead">
+            Meu trabalho está muito ligado a conciliações, análises financeiras, fluxo de caixa e leitura de demonstrativos,
+            sempre com a preocupação de mostrar o que importa, onde está o risco e onde existe oportunidade de melhoria.
+            Não busco “embelezar” números — busco entender, explicar e simplificar.
+          </p>
+
+          <div class="miniStats" aria-label="Resumo">
+            <div class="stat">
+              <div class="stat__n">+</div>
+              <div class="stat__k">Processos mais claros</div>
+            </div>
+            <div class="stat">
+              <div class="stat__n">OK</div>
+              <div class="stat__k">Rastreabilidade</div>
+            </div>
+            <div class="stat">
+              <div class="stat__n">Foco</div>
+              <div class="stat__k">Decisão e risco</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="projects">
+      <h2 class="h2 h2--center">Projects</h2>
+
+      <div class="projects__grid">
+        <button class="project" type="button" data-open="p1">
+          <div class="project__icon">
+            <img src="./assets/icons/fluxo-caixa.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="project__t">Fluxo de Caixa</div>
+          <div class="project__s">Entradas/saídas, visão gerencial e ofensores.</div>
+        </button>
+
+        <button class="project" type="button" data-open="p2">
+          <div class="project__icon">
+            <img src="./assets/icons/conciliacao.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="project__t">Conciliação Automática</div>
+          <div class="project__s">Comparo bases e aponto divergências com lógica.</div>
+        </button>
+
+        <button class="project" type="button" data-open="p3">
+          <div class="project__icon">
+            <img src="./assets/icons/endividamento.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="project__t">Endividamento</div>
+          <div class="project__s">Custo, prazo, estrutura e indicadores.</div>
+        </button>
+
+        <button class="project" type="button" data-open="p4">
+          <div class="project__icon">
+            <img src="./assets/icons/consolidacao.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="project__t">Consolidação</div>
+          <div class="project__s">Eliminações, participação e visão consolidada.</div>
+        </button>
+      </div>
+    </section>
+
+    <!-- CONTACT ANCHOR -->
+    <div id="contact" class="contactAnchor"></div>
+
+    <footer class="footer">
+      <div class="footer__inner">
+        <div>© <span id="year"></span> Flávia Ramos</div>
+        <button class="linkBtn" type="button" id="btnContact2">Contato</button>
+      </div>
+    </footer>
+  </main>
+
+  <!-- MODAL: CONTACT -->
+  <div id="modalContact" class="modal" aria-hidden="true">
+    <div class="modal__backdrop" data-close="c"></div>
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-label="Contato">
+      <button class="modal__close" type="button" data-close="c">×</button>
+      <div class="modal__head">
+        <div class="modal__title">Contato</div>
+        <div class="modal__sub">LinkedIn</div>
+      </div>
+      <div class="modal__body">
+        <div class="contactBox">
+          <div class="contactBox__name">Flávia Ramos</div>
+          <a class="contactBox__link" href="https://www.linkedin.com/in/flaviabarbosaramos/" target="_blank" rel="noopener">
+            linkedin.com/in/flaviabarbosaramos
+          </a>
+        </div>
+
+        <div class="modal__cta">
+          <a class="btn btn--primary btn--wide" href="https://www.linkedin.com/in/flaviabarbosaramos/" target="_blank" rel="noopener">
+            Abrir LinkedIn
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="hero__photo">
-    <img src="./assets/img/avatar/flavia.png" alt="Flávia Ramos" />
+  <!-- MODAL: PROJECT -->
+  <div id="modalProject" class="modal" aria-hidden="true">
+    <div class="modal__backdrop" data-close="p"></div>
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-label="Projeto">
+      <button class="modal__close" type="button" data-close="p">×</button>
+      <div class="modal__head">
+        <div id="mTitle" class="modal__title"></div>
+        <div id="mSub" class="modal__sub"></div>
+      </div>
+      <div class="modal__body">
+        <div id="mText" class="modal__text"></div>
+        <div class="modal__cta">
+          <a id="mDemo" class="btn btn--primary btn--wide" href="#" target="_blank" rel="noopener">Abrir Demo</a>
+        </div>
+      </div>
+    </div>
   </div>
-</header>
 
-<section class="areas">
-  <div class="area">
-    <img src="./assets/icons/fluxo-caixa.svg" alt="" />
-    <span>Fluxo de Caixa</span>
-  </div>
-  <div class="area">
-    <img src="./assets/icons/conciliacao.svg" alt="" />
-    <span>Conciliação Automática</span>
-  </div>
-  <div class="area">
-    <img src="./assets/icons/endividamento.svg" alt="" />
-    <span>Endividamento</span>
-  </div>
-  <div class="area">
-    <img src="./assets/icons/consolidacao.svg" alt="" />
-    <span>Consolidação</span>
-  </div>
-</section>
-
-<section class="about">
-  <h3>Sobre mim</h3>
-
-  <p>
-    Atuo na área de controladoria com foco em organizar números, identificar incoerências
-    e transformar dados financeiros em informação clara para decisão.
-  </p>
-
-  <p>
-    Gosto de pegar processos confusos, planilhas soltas e rotinas manuais e estruturar
-    tudo de forma lógica, rastreável e automatizada.
-  </p>
-
-  <p>
-    Meu trabalho está ligado a conciliações, análises financeiras, fluxo de caixa e
-    leitura de demonstrativos, sempre com a preocupação de mostrar o que importa,
-    onde está o risco e onde existe oportunidade de melhoria.
-  </p>
-
-  <p>
-    Não busco embelezar números — busco entender, explicar e simplificar.
-  </p>
-
-  <div class="skills">
-    <span>Conciliação</span>
-    <span>Excel avançado</span>
-    <span>Power BI</span>
-    <span>IFRS</span>
-    <span>Automação</span>
-  </div>
-</section>
-
-<section id="contato" class="contact">
-  <h3>Contato</h3>
-  <a href="https://www.linkedin.com/in/flaviabarbosaramos/" target="_blank">
-    linkedin.com/in/flaviabarbosaramos
-  </a>
-</section>
-
-<script src="./assets/js/main.js"></script>
+  <script src="./cards/cards-data.js?v=1"></script>
+  <script src="./assets/js/main.js?v=1"></script>
 </body>
 </html>
