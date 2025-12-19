@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=980, initial-scale=1" />
-  <title>Portfólio Flávia</title>
+  <title>Flávia Ramos</title>
   <link rel="stylesheet" href="./assets/css/style.css" />
 </head>
 <body>
   <div class="bg"></div>
 
   <main class="wrap">
-    <section class="phone" aria-label="Portfólio Flávia">
+    <section class="phone" aria-label="Portfólio Flávia Ramos">
       <header class="phonebar">
         <button class="xbtn" type="button" aria-label="Fechar" disabled>×</button>
         <div id="dots" class="dots" aria-hidden="true"></div>
@@ -23,26 +23,43 @@
             <div class="card__badge" id="badge"></div>
           </div>
           <div class="card__body">
-            <div class="card__titleRow">
-              <h1 id="cardTitle" class="card__title"></h1>
-            </div>
+            <h1 id="cardTitle" class="card__title"></h1>
             <p id="cardTag" class="card__tag"></p>
           </div>
         </div>
 
+        <div class="ctaRow">
+          <button id="btnProject" class="pillBtn" type="button" aria-label="Abrir Projeto">
+            <img class="pillBtn__icon" src="./assets/icons/heart.svg" alt="" />
+            <span>Abrir Projeto</span>
+          </button>
+        </div>
+
         <div class="profile">
           <div class="profile__row">
-            <img class="avatar" src="./assets/img/placeholders/avatar.png" alt="Flávia" />
+            <img class="avatar" src="./assets/img/avatar.png" alt="Flávia Ramos" />
             <div class="profile__brand">
-              <div class="profile__name">Portfólio Flávia</div>
-              <div class="profile__meta"><span id="counter">1/1</span></div>
+              <div class="profile__name">Flávia Ramos</div>
+              <div class="profile__meta">Controladoria • Dados • Automação</div>
             </div>
           </div>
 
-          <div class="bio">
-            <div class="bio__line"><span class="bio__k">Escopo:</span> <span id="bioScope"></span></div>
-            <div class="bio__line"><span class="bio__k">Entrega:</span> <span id="bioDelivery"></span></div>
-            <div class="bio__line"><span class="bio__k">Stack:</span> <span id="bioStack"></span></div>
+          <div class="about">
+            <div class="about__t">Quem sou eu</div>
+            <div class="about__p">
+              Analista de Controladoria Sênior com foco em automação de rotinas financeiras, conciliações e análise de dados.
+              Construo soluções simples e visuais para transformar planilhas e relatórios em decisões rápidas.
+            </div>
+
+            <div class="about__t">Principais habilidades</div>
+            <div class="chips">
+              <span class="chip">Conciliação</span>
+              <span class="chip">Power BI</span>
+              <span class="chip">Excel avançado</span>
+              <span class="chip">SQL</span>
+              <span class="chip">Python (automação)</span>
+              <span class="chip">FP&amp;A</span>
+            </div>
           </div>
         </div>
 
@@ -51,32 +68,52 @@
             <span class="ic">‹</span>
           </button>
 
-          <button id="btnProject" class="cbtn cbtn--red" type="button" aria-label="Ver Projeto">
-            <img class="icSvg" src="./assets/icons/heart.svg" alt="" />
-          </button>
-
           <button id="btnSuper" class="cbtn cbtn--blue" type="button" aria-label="Super Like">
             <span class="ic">★</span>
+            <span class="sub">Super Like</span>
           </button>
         </div>
       </div>
     </section>
   </main>
 
-  <div id="modal" class="modal" aria-hidden="true">
-    <div class="modal__backdrop" data-close="1"></div>
-    <div class="modal__panel" role="dialog" aria-modal="true" aria-label="Detalhes do projeto">
-      <button class="modal__close" type="button" data-close="1">×</button>
+  <div id="modalProject" class="modal" aria-hidden="true">
+    <div class="modal__backdrop" data-close="p"></div>
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-label="Projeto">
+      <button class="modal__close" type="button" data-close="p">×</button>
       <div class="modal__head">
         <div id="mTitle" class="modal__title"></div>
         <div id="mSub" class="modal__sub"></div>
       </div>
       <div class="modal__body">
-        <div class="pillrow" id="mPills"></div>
         <div class="modal__text" id="mText"></div>
         <div class="modal__cta">
           <a id="mDemo" class="btn btn--primary btn--wide" href="#" target="_blank" rel="noopener">Abrir Demo</a>
           <a id="mRepo" class="btn btn--ghost btn--wide" href="#" target="_blank" rel="noopener">Ver Código</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="modalContact" class="modal" aria-hidden="true">
+    <div class="modal__backdrop" data-close="c"></div>
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-label="Contato">
+      <button class="modal__close" type="button" data-close="c">×</button>
+      <div class="modal__head">
+        <div class="modal__title">Contato</div>
+        <div class="modal__sub">Super Like = falar comigo</div>
+      </div>
+      <div class="modal__body">
+        <div class="contact">
+          <div class="contact__name">Flávia Ramos</div>
+          <a class="contact__link" href="https://www.linkedin.com/in/flaviabarbosaramos/" target="_blank" rel="noopener">
+            linkedin.com/in/flaviabarbosaramos
+          </a>
+        </div>
+        <div class="modal__cta">
+          <a class="btn btn--primary btn--wide" href="https://www.linkedin.com/in/flaviabarbosaramos/" target="_blank" rel="noopener">
+            Abrir LinkedIn
+          </a>
         </div>
       </div>
     </div>

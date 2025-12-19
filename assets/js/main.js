@@ -5,9 +5,6 @@
   const elTitle = document.getElementById("cardTitle");
   const elTag = document.getElementById("cardTag");
   const elBadge = document.getElementById("badge");
-  const elScope = document.getElementById("bioScope");
-  const elDelivery = document.getElementById("bioDelivery");
-  const elStack = document.getElementById("bioStack");
   const elDots = document.getElementById("dots");
   const elCounter = document.getElementById("counter");
 
@@ -15,13 +12,14 @@
   const btnProject = document.getElementById("btnProject");
   const btnSuper = document.getElementById("btnSuper");
 
-  const modal = document.getElementById("modal");
+  const modalProject = document.getElementById("modalProject");
   const mTitle = document.getElementById("mTitle");
   const mSub = document.getElementById("mSub");
-  const mPills = document.getElementById("mPills");
   const mText = document.getElementById("mText");
   const mDemo = document.getElementById("mDemo");
   const mRepo = document.getElementById("mRepo");
+
+  const modalContact = document.getElementById("modalContact");
 
   let i = 0;
   let drag = null;
@@ -39,11 +37,7 @@
   };
 
   const hideBadge = () => elBadge.classList.remove("is-show");
-
-  const showBadge = (txt) => {
-    elBadge.textContent = txt;
-    elBadge.classList.add("is-show");
-  };
+  const showBadge = (txt) => { elBadge.textContent = txt; elBadge.classList.add("is-show"); };
 
   const render = () => {
     if (!cards.length) return;
@@ -52,9 +46,6 @@
     elMedia.alt = c.title || "Projeto";
     elTitle.textContent = c.title || "";
     elTag.textContent = c.tag || "";
-    elScope.textContent = c.scope || "";
-    elDelivery.textContent = c.delivery || "";
-    elStack.textContent = c.stack || "";
     hideBadge();
     setDots();
   };
@@ -81,36 +72,35 @@
     setTimeout(() => (elCard.style.transition = ""), 180);
   };
 
-  const openModal = () => {
+  const openModal = (m) => {
+    m.classList.add("is-open");
+    m.setAttribute("aria-hidden", "false");
+  };
+
+  const closeModal = (m) => {
+    m.classList.remove("is-open");
+    m.setAttribute("aria-hidden", "true");
+  };
+
+  const openProject = () => {
     const c = cards[i];
     mTitle.textContent = c.title || "";
     mSub.textContent = c.tag || "";
-    mPills.innerHTML = "";
-    const pills = [];
-    if (c.scope) pills.push(["Escopo", c.scope]);
-    if (c.delivery) pills.push(["Entrega", c.delivery]);
-    if (c.stack) pills.push(["Stack", c.stack]);
-    pills.slice(0, 3).forEach(([k, v]) => {
-      const p = document.createElement("div");
-      p.className = "pill";
-      p.textContent = `${k}: ${v}`;
-      mPills.appendChild(p);
-    });
     mText.textContent = "Aqui vai entrar a demo/resultado do projeto. Por enquanto estamos fechando a interface.";
     mDemo.href = c.demoUrl || "#";
     mRepo.href = c.repoUrl || "#";
-    modal.classList.add("is-open");
-    modal.setAttribute("aria-hidden", "false");
+    openModal(modalProject);
   };
 
-  const closeModal = () => {
-    modal.classList.remove("is-open");
-    modal.setAttribute("aria-hidden", "true");
-  };
-
-  modal.addEventListener("click", (e) => {
+  document.addEventListener("click", (e) => {
     const t = e.target;
-    if (t && t.getAttribute && t.getAttribute("data-close") === "1") closeModal();
+    const k = t && t.getAttribute ? t.getAttribute("data-close") : null;
+    if (k === "p") closeModal(modalProject);
+    if (k === "c") closeModal(modalContact);
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") { closeModal(modalProject); closeModal(modalContact); }
   });
 
   const onDown = (x, y) => {
@@ -149,12 +139,9 @@
     setTimeout(() => fling(-1), 90);
   });
 
-  btnSuper.addEventListener("click", () => {
-    showBadge("SUPER LIKE");
-    setTimeout(() => fling(1), 90);
-  });
+  btnProject.addEventListener("click", openProject);
 
-  btnProject.addEventListener("click", openModal);
+  btnSuper.addEventListener("click", () => openModal(modalContact));
 
   render();
 })();
