@@ -1,67 +1,221 @@
 (() => {
-  const cards = window.PORTFOLIO_CARDS;
-  let i = 0;
+  const cards = (window.PORTFOLIO_CARDS || []).slice();
 
-  const fImg = document.getElementById("frontMedia");
-  const fTitle = document.getElementById("frontTitle");
-  const fTag = document.getElementById("frontTag");
+  const bars = document.getElementById("bars");
+  const front = document.getElementById("cardFront");
+  const back = document.getElementById("cardBack");
 
-  const bImg = document.getElementById("backMedia");
-  const bTitle = document.getElementById("backTitle");
-  const bTag = document.getElementById("backTag");
+  const frontMedia = document.getElementById("frontMedia");
+  const frontTitle = document.getElementById("frontTitle");
+  const frontTag = document.getElementById("frontTag");
+
+  const backMedia = document.getElementById("backMedia");
+  const backTitle = document.getElementById("backTitle");
+  const backTag = document.getElementById("backTag");
 
   const badge = document.getElementById("badge");
 
+  const btnProject = document.getElementById("btnProject");
+  const btnSuper = document.getElementById("btnSuper");
+  const btnProfile = document.getElementById("btnProfile");
+
+  const modalProject = document.getElementById("modalProject");
   const mTitle = document.getElementById("mTitle");
+  const mSub = document.getElementById("mSub");
   const mText = document.getElementById("mText");
   const mDemo = document.getElementById("mDemo");
 
-  const render = () => {
+  const modalContact = document.getElementById("modalContact");
+  const modalProfile = document.getElementById("modalProfile");
+
+  if (!cards.length || !front || !back) return;
+
+  let i = 0;
+  let drag = null;
+  let animating = false;
+
+  const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
+  const nextIndex = (idx) => (idx + 1) % cards.length;
+
+  const showBadge = (txt) => {
+    if (!badge) return;
+    badge.textContent = txt;
+    badge.classList.add("is-show");
+  };
+
+  const hideBadge = () => {
+    if (!badge) return;
+    badge.classList.remove("is-show");
+  };
+
+  const setBars = () => {
+    if (!bars) return;
+    bars.innerHTML = "";
+    for (let k = 0; k < cards.length; k++) {
+      const b = document.createElement("button");
+      b.className = "bar" + (k === i ? " is-active" : "");
+      b.type = "button";
+      b.addEventListener("click", () => jumpTo(k));
+      bars.appendChild(b);
+    }
+  };
+
+  const renderCard = (idx, which) => {
+    const c = cards[idx];
+    const m = which === "front" ? frontMedia : backMedia;
+    const t = which === "front" ? frontTitle : backTitle;
+    const g = which === "front" ? frontTag : backTag;
+    if (m) { m.src = c.image || ""; m.alt = c.title || "Projeto"; }
+    if (t) t.textContent = c.title || "";
+    if (g) g.textContent = c.tag || "";
+  };
+
+  const resetTransforms = () => {
+    front.style.transition = "";
+    back.style.transition = "";
+    front.style.opacity = "1";
+    front.style.transform = "translate3d(0,0,0) rotate(0deg)";
+    back.style.transform = "translate3d(0,10px,0) scale(.97)";
+    back.style.opacity = ".92";
+  };
+
+  const sync = () => {
+    renderCard(i, "front");
+    renderCard(nextIndex(i), "back");
+    hideBadge();
+    setBars();
+    resetTransforms();
+  };
+
+  const openModal = (m) => {
+    if (!m) return;
+    m.classList.add("is-open");
+    m.setAttribute("aria-hidden", "false");
+  };
+
+  const closeModal = (m) => {
+    if (!m) return;
+    m.classList.remove("is-open");
+    m.setAttribute("aria-hidden", "true");
+  };
+
+  const openProject = () => {
     const c = cards[i];
-    const n = cards[(i + 1) % cards.length];
-
-    fImg.src = c.image;
-    fTitle.textContent = c.title;
-    fTag.textContent = c.tag;
-
-    bImg.src = n.image;
-    bTitle.textContent = n.title;
-    bTag.textContent = n.tag;
+    if (mTitle) mTitle.textContent = c.title || "";
+    if (mSub) mSub.textContent = c.tag || "";
+    if (mText) mText.textContent = c.description || "";
+    if (mDemo) mDemo.href = c.demoUrl || "#";
+    openModal(modalProject);
   };
 
-  const next = () => {
-    i = (i + 1) % cards.length;
-    render();
-  };
-
-  let startX = null;
-
-  fImg.addEventListener("pointerdown", e => startX = e.clientX);
-  fImg.addEventListener("pointerup", e => {
-    if (startX === null) return;
-    const dx = e.clientX - startX;
-    if (Math.abs(dx) > 80) next();
-    startX = null;
+  document.addEventListener("click", (e) => {
+    const t = e.target;
+    const k = t && t.getAttribute ? t.getAttribute("data-close") : null;
+    if (k === "p") closeModal(modalProject);
+    if (k === "c") closeModal(modalContact);
+    if (k === "v") closeModal(modalProfile);
   });
 
-  document.getElementById("btnProject").onclick = () => {
-    const c = cards[i];
-    mTitle.textContent = c.title;
-    mText.textContent = c.tag;
-    mDemo.href = c.demo;
-    document.getElementById("modalProject").classList.add("open");
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") { closeModal(modalProject); closeModal(modalContact); closeModal(modalProfile); }
+    if (e.key === "ArrowRight") swipe(1);
+    if (e.key === "ArrowLeft") swipe(-1);
+  });
+
+  const jumpTo = (k) => {
+    if (animating || k === i) return;
+    animating = true;
+    front.style.transition = "opacity .14s ease, transform .14s ease";
+    front.style.opacity = "0";
+    front.style.transform = "translate3d(0,8px,0) scale(.995)";
+    setTimeout(() => {
+      i = k;
+      sync();
+      front.style.transition = "opacity .16s ease";
+      front.style.opacity = "1";
+      setTimeout(() => {
+        front.style.transition = "";
+        animating = false;
+      }, 170);
+    }, 140);
   };
 
-  document.getElementById("btnSuper").onclick = () =>
-    document.getElementById("modalContact").classList.add("open");
+  const swipe = (dir) => {
+    if (animating) return;
+    animating = true;
 
-  document.getElementById("btnProfile").onclick = () =>
-    document.getElementById("modalProfile").classList.add("open");
+    const off = dir * 520;
+    front.style.transition = "transform .22s ease, opacity .22s ease";
+    back.style.transition = "transform .22s ease, opacity .22s ease";
 
-  document.querySelectorAll("[data-close]").forEach(el =>
-    el.onclick = () =>
-      el.closest(".modal").classList.remove("open")
-  );
+    front.style.opacity = "0";
+    front.style.transform = `translate3d(${off}px, -8px, 0) rotate(${dir * 10}deg)`;
 
-  render();
+    back.style.opacity = "1";
+    back.style.transform = "translate3d(0,0,0) scale(1)";
+
+    setTimeout(() => {
+      i = dir > 0 ? nextIndex(i) : (i - 1 + cards.length) % cards.length;
+      sync();
+      animating = false;
+    }, 230);
+  };
+
+  const onDown = (x, y) => {
+    if (animating) return;
+    drag = { x0: x, y0: y, dx: 0, dy: 0 };
+  };
+
+  const onMove = (x, y) => {
+    if (!drag || animating) return;
+    drag.dx = x - drag.x0;
+    drag.dy = y - drag.y0;
+
+    const r = clamp(drag.dx / 30, -10, 10);
+    front.style.transform = `translate3d(${drag.dx}px, ${drag.dy * 0.10}px, 0) rotate(${r}deg)`;
+
+    const p = clamp(Math.abs(drag.dx) / 220, 0, 1);
+    const s = 0.97 + (0.03 * p);
+    const ty = 10 - (10 * p);
+    back.style.transform = `translate3d(0,${ty}px,0) scale(${s})`;
+    back.style.opacity = String(0.92 + (0.08 * p));
+
+    if (Math.abs(drag.dx) > 36) showBadge("PRÓXIMO");
+    else hideBadge();
+  };
+
+  const onUp = () => {
+    if (!drag || animating) return;
+    const dx = drag.dx;
+    drag = null;
+
+    if (Math.abs(dx) > 110) {
+      swipe(dx > 0 ? 1 : -1);
+      hideBadge();
+      return;
+    }
+
+    front.style.transition = "transform .18s ease";
+    back.style.transition = "transform .18s ease, opacity .18s ease";
+    resetTransforms();
+    setTimeout(() => {
+      front.style.transition = "";
+      back.style.transition = "";
+      hideBadge();
+    }, 180);
+  };
+
+  front.addEventListener("pointerdown", (e) => {
+    front.setPointerCapture(e.pointerId);
+    onDown(e.clientX, e.clientY);
+  });
+  front.addEventListener("pointermove", (e) => onMove(e.clientX, e.clientY));
+  front.addEventListener("pointerup", onUp);
+  front.addEventListener("pointercancel", onUp);
+
+  if (btnProject) btnProject.addEventListener("click", openProject);
+  if (btnSuper) btnSuper.addEventListener("click", () => openModal(modalContact));
+  if (btnProfile) btnProfile.addEventListener("click", () => openModal(modalProfile));
+
+  sync();
 })();
