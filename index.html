@@ -7,55 +7,57 @@
   <link rel="stylesheet" href="./assets/css/style.css" />
 </head>
 <body>
-  <header class="topbar">
-    <div class="topbar__left">
-      <img class="avatar" src="./assets/img/placeholders/avatar.png" alt="Flávia" />
-      <div class="brand">
-        <div class="brand__title">Portfólio Flávia</div>
-        <div class="brand__meta"><span id="counter">1/1</span></div>
-      </div>
-    </div>
-    <div class="topbar__right">
-      <div id="dots" class="dots" aria-hidden="true"></div>
-    </div>
-  </header>
+  <div class="bg"></div>
 
-  <main class="stage">
-    <section class="deck" aria-label="Projetos">
-      <div id="card" class="card" role="group" aria-label="Card do projeto">
-        <div class="card__media">
-          <img id="cardMedia" class="card__img" src="" alt="" />
-          <div class="card__badge" id="badge"></div>
-        </div>
-        <div class="card__body">
-          <h1 id="cardTitle" class="card__title"></h1>
-          <p id="cardTag" class="card__tag"></p>
-        </div>
-      </div>
+  <main class="wrap">
+    <section class="phone" aria-label="Portfólio Flávia">
+      <header class="phonebar">
+        <button class="xbtn" type="button" aria-label="Fechar" disabled>×</button>
+        <div id="dots" class="dots" aria-hidden="true"></div>
+      </header>
 
-      <div class="actions">
-        <button id="btnProject" class="btn btn--primary" type="button">
-          <img class="btn__icon" src="./assets/icons/heart.svg" alt="" />
-          <span>Ver Projeto</span>
-        </button>
-        <button id="btnSuper" class="btn btn--secondary" type="button">
-          <span class="star">★</span>
-          <span>Super Like</span>
-        </button>
-      </div>
+      <div class="screen">
+        <div id="card" class="card" role="group" aria-label="Card do projeto">
+          <div class="card__media">
+            <img id="cardMedia" class="card__img" src="" alt="" />
+            <div class="card__badge" id="badge"></div>
+          </div>
+          <div class="card__body">
+            <div class="card__titleRow">
+              <h1 id="cardTitle" class="card__title"></h1>
+            </div>
+            <p id="cardTag" class="card__tag"></p>
+          </div>
+        </div>
 
-      <div class="bio" aria-label="Perfil do projeto">
-        <div class="bio__row">
-          <div class="bio__label">Escopo</div>
-          <div id="bioScope" class="bio__value"></div>
+        <div class="profile">
+          <div class="profile__row">
+            <img class="avatar" src="./assets/img/placeholders/avatar.png" alt="Flávia" />
+            <div class="profile__brand">
+              <div class="profile__name">Portfólio Flávia</div>
+              <div class="profile__meta"><span id="counter">1/1</span></div>
+            </div>
+          </div>
+
+          <div class="bio">
+            <div class="bio__line"><span class="bio__k">Escopo:</span> <span id="bioScope"></span></div>
+            <div class="bio__line"><span class="bio__k">Entrega:</span> <span id="bioDelivery"></span></div>
+            <div class="bio__line"><span class="bio__k">Stack:</span> <span id="bioStack"></span></div>
+          </div>
         </div>
-        <div class="bio__row">
-          <div class="bio__label">Entrega</div>
-          <div id="bioDelivery" class="bio__value"></div>
-        </div>
-        <div class="bio__row">
-          <div class="bio__label">Stack</div>
-          <div id="bioStack" class="bio__value"></div>
+
+        <div class="controls">
+          <button id="btnNext" class="cbtn cbtn--mint" type="button" aria-label="Próximo">
+            <span class="ic">‹</span>
+          </button>
+
+          <button id="btnProject" class="cbtn cbtn--red" type="button" aria-label="Ver Projeto">
+            <img class="icSvg" src="./assets/icons/heart.svg" alt="" />
+          </button>
+
+          <button id="btnSuper" class="cbtn cbtn--blue" type="button" aria-label="Super Like">
+            <span class="ic">★</span>
+          </button>
         </div>
       </div>
     </section>
