@@ -115,15 +115,11 @@
     const k = t && t.getAttribute ? t.getAttribute("data-close") : null;
     if (k === "p") closeModal(modalProject);
     if (k === "c") closeModal(modalContact);
-    if (k === "r") closeModal(modalProfile);
+    if (k === "pf") closeModal(modalProfile);
   });
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      closeModal(modalProject);
-      closeModal(modalContact);
-      closeModal(modalProfile);
-    }
+    if (e.key === "Escape") { closeModal(modalProject); closeModal(modalContact); closeModal(modalProfile); }
     if (e.key === "ArrowRight") swipe(1);
     if (e.key === "ArrowLeft") swipe(-1);
   });
