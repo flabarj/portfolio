@@ -2,150 +2,89 @@
 <html lang="pt-br">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=980, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Flávia Ramos</title>
-  <link rel="stylesheet" href="./assets/css/style.css?v=11" />
+  <link rel="stylesheet" href="./assets/css/style.css" />
 </head>
 <body>
-  <div class="bg"></div>
 
-  <main class="wrap">
-    <section class="phone" aria-label="Portfólio Flávia Ramos">
-      <header class="phonebar">
-        <button class="xbtn" type="button" aria-label="Fechar" disabled>×</button>
-        <div id="bars" class="bars" aria-label="Projetos"></div>
-      </header>
+<header class="hero">
+  <div class="hero__content">
+    <p class="hero__hello">Oi, eu sou</p>
+    <h1 class="hero__name">Flávia Ramos</h1>
+    <h2 class="hero__tagline">Eu organizo o que está bagunçado.</h2>
 
-      <div class="screen">
-        <div class="deck" aria-label="Projetos">
-          <div id="cardBack" class="card card--back" role="group" aria-label="Próximo projeto">
-            <div class="card__media">
-              <img id="backMedia" class="card__img" src="" alt="" />
-            </div>
-            <div class="card__body">
-              <h1 id="backTitle" class="card__title"></h1>
-              <p id="backTag" class="card__tag"></p>
-            </div>
-          </div>
-
-          <div id="cardFront" class="card card--front" role="group" aria-label="Projeto atual">
-            <div class="card__media">
-              <img id="frontMedia" class="card__img" src="" alt="" />
-              <div id="badge" class="card__badge"></div>
-            </div>
-            <div class="card__body">
-              <h1 id="frontTitle" class="card__title"></h1>
-              <p id="frontTag" class="card__tag"></p>
-            </div>
-          </div>
-        </div>
-
-        <div class="ctaRow">
-          <button id="btnProject" class="pillBtn pillBtn--primary" type="button" aria-label="Abrir Projeto">
-            <img class="pillBtn__icon" src="./assets/icons/heart.svg" alt="" />
-            <span>Abrir Projeto</span>
-          </button>
-
-          <button id="btnSuper" class="pillBtn pillBtn--secondary" type="button" aria-label="Contato">
-            <span class="pillBtn__star">★</span>
-            <span>Contato</span>
-          </button>
-        </div>
-
-        <div class="profile">
-          <div class="profile__row">
-            <img class="avatar" src="./assets/img/avatar.png?v=11" alt="Flávia Ramos" />
-            <div class="profile__brand">
-              <div class="profile__name">Flávia Ramos</div>
-              <div class="profile__meta">Controladoria • Dados • Automação</div>
-              <button id="btnProfile" class="pillBtn pillBtn--secondary pillBtn--mini" type="button" aria-label="Ver Perfil">
-                <span>Ver Perfil</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <div id="modalProject" class="modal" aria-hidden="true">
-    <div class="modal__backdrop" data-close="p"></div>
-    <div class="modal__panel" role="dialog" aria-modal="true" aria-label="Projeto">
-      <button class="modal__close" type="button" data-close="p">×</button>
-      <div class="modal__head">
-        <div id="mTitle" class="modal__title"></div>
-        <div id="mSub" class="modal__sub"></div>
-      </div>
-      <div class="modal__body">
-        <div class="modal__text" id="mText"></div>
-        <div class="modal__cta modal__cta--single">
-          <a id="mDemo" class="btn btn--primary btn--wide" href="#" target="_blank" rel="noopener">Abrir Demo</a>
-        </div>
-      </div>
+    <div class="hero__actions">
+      <a href="#contato" class="btn btn--primary">Tem um problema?</a>
+      <a href="./docs/flavia-ramos-cv-pdf.pdf" class="btn btn--ghost" download>
+        Currículo
+      </a>
     </div>
   </div>
 
-  <div id="modalContact" class="modal" aria-hidden="true">
-    <div class="modal__backdrop" data-close="c"></div>
-    <div class="modal__panel" role="dialog" aria-modal="true" aria-label="Contato">
-      <button class="modal__close" type="button" data-close="c">×</button>
-      <div class="modal__head">
-        <div class="modal__title">Contato</div>
-      </div>
-      <div class="modal__body">
-        <div class="contact">
-          <div class="contact__name">Flávia Ramos</div>
-          <a class="contact__link" href="https://www.linkedin.com/in/flaviabarbosaramos/" target="_blank" rel="noopener">
-            linkedin.com/in/flaviabarbosaramos
-          </a>
-        </div>
-        <div class="modal__cta modal__cta--single">
-          <a class="btn btn--primary btn--wide" href="https://www.linkedin.com/in/flaviabarbosaramos/" target="_blank" rel="noopener">
-            Abrir LinkedIn
-          </a>
-        </div>
-      </div>
-    </div>
+  <div class="hero__photo">
+    <img src="./assets/img/avatar/flavia.png" alt="Flávia Ramos" />
   </div>
+</header>
 
-  <div id="modalProfile" class="modal" aria-hidden="true">
-    <div class="modal__backdrop" data-close="pf"></div>
-    <div class="modal__panel" role="dialog" aria-modal="true" aria-label="Perfil">
-      <button class="modal__close" type="button" data-close="pf">×</button>
-      <div class="modal__head">
-        <div class="modal__title">Flávia Ramos</div>
-        <div class="modal__sub">Controladoria • Dados • Automação</div>
-      </div>
-      <div class="modal__body">
-        <div class="modal__text">
-          <p>
-            Atuo na área de controladoria com foco em organizar números, identificar incoerências e transformar dados financeiros em informação clara para decisão.
-            Gosto de pegar processos confusos, planilhas soltas e rotinas manuais e estruturar tudo de forma lógica, rastreável e automatizada.
-          </p>
-          <p>
-            Meu trabalho está muito ligado a conciliações, análises financeiras, fluxo de caixa e leitura de demonstrativos, sempre com a preocupação de mostrar o que importa,
-            onde está o risco e onde existe oportunidade de melhoria. Não busco “embelezar” números — busco entender, explicar e simplificar.
-          </p>
-        </div>
-
-        <div class="modal__chips" aria-label="Habilidades">
-          <span class="chip">Conciliação</span>
-          <span class="chip">Excel avançado</span>
-          <span class="chip">Power BI</span>
-          <span class="chip">IFRS</span>
-          <span class="chip">Automação</span>
-        </div>
-
-        <div class="modal__cta modal__cta--single">
-          <a class="btn btn--primary btn--wide" href="https://www.linkedin.com/in/flaviabarbosaramos/" target="_blank" rel="noopener">
-            Ver trajetória no LinkedIn
-          </a>
-        </div>
-      </div>
-    </div>
+<section class="areas">
+  <div class="area">
+    <img src="./assets/icons/fluxo-caixa.svg" alt="" />
+    <span>Fluxo de Caixa</span>
   </div>
+  <div class="area">
+    <img src="./assets/icons/conciliacao.svg" alt="" />
+    <span>Conciliação Automática</span>
+  </div>
+  <div class="area">
+    <img src="./assets/icons/endividamento.svg" alt="" />
+    <span>Endividamento</span>
+  </div>
+  <div class="area">
+    <img src="./assets/icons/consolidacao.svg" alt="" />
+    <span>Consolidação</span>
+  </div>
+</section>
 
-  <script src="./cards/cards-data.js?v=11"></script>
-  <script src="./assets/js/main.js?v=11"></script>
+<section class="about">
+  <h3>Sobre mim</h3>
+
+  <p>
+    Atuo na área de controladoria com foco em organizar números, identificar incoerências
+    e transformar dados financeiros em informação clara para decisão.
+  </p>
+
+  <p>
+    Gosto de pegar processos confusos, planilhas soltas e rotinas manuais e estruturar
+    tudo de forma lógica, rastreável e automatizada.
+  </p>
+
+  <p>
+    Meu trabalho está ligado a conciliações, análises financeiras, fluxo de caixa e
+    leitura de demonstrativos, sempre com a preocupação de mostrar o que importa,
+    onde está o risco e onde existe oportunidade de melhoria.
+  </p>
+
+  <p>
+    Não busco embelezar números — busco entender, explicar e simplificar.
+  </p>
+
+  <div class="skills">
+    <span>Conciliação</span>
+    <span>Excel avançado</span>
+    <span>Power BI</span>
+    <span>IFRS</span>
+    <span>Automação</span>
+  </div>
+</section>
+
+<section id="contato" class="contact">
+  <h3>Contato</h3>
+  <a href="https://www.linkedin.com/in/flaviabarbosaramos/" target="_blank">
+    linkedin.com/in/flaviabarbosaramos
+  </a>
+</section>
+
+<script src="./assets/js/main.js"></script>
 </body>
 </html>
