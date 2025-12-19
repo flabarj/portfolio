@@ -2,6 +2,7 @@
   const cards = (window.PORTFOLIO_CARDS || []).slice();
 
   const bars = document.getElementById("bars");
+
   const front = document.getElementById("cardFront");
   const back = document.getElementById("cardBack");
 
@@ -55,6 +56,7 @@
       const b = document.createElement("button");
       b.className = "bar" + (k === i ? " is-active" : "");
       b.type = "button";
+      b.setAttribute("aria-label", `Projeto ${k + 1}`);
       b.addEventListener("click", () => jumpTo(k));
       bars.appendChild(b);
     }
@@ -103,7 +105,7 @@
     const c = cards[i];
     if (mTitle) mTitle.textContent = c.title || "";
     if (mSub) mSub.textContent = c.tag || "";
-    if (mText) mText.textContent = c.description || "";
+    if (mText) mText.textContent = c.description || "Aqui vai entrar a demo/resultado do projeto.";
     if (mDemo) mDemo.href = c.demoUrl || "#";
     openModal(modalProject);
   };
@@ -113,11 +115,15 @@
     const k = t && t.getAttribute ? t.getAttribute("data-close") : null;
     if (k === "p") closeModal(modalProject);
     if (k === "c") closeModal(modalContact);
-    if (k === "v") closeModal(modalProfile);
+    if (k === "r") closeModal(modalProfile);
   });
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") { closeModal(modalProject); closeModal(modalContact); closeModal(modalProfile); }
+    if (e.key === "Escape") {
+      closeModal(modalProject);
+      closeModal(modalContact);
+      closeModal(modalProfile);
+    }
     if (e.key === "ArrowRight") swipe(1);
     if (e.key === "ArrowLeft") swipe(-1);
   });
@@ -180,7 +186,8 @@
     back.style.transform = `translate3d(0,${ty}px,0) scale(${s})`;
     back.style.opacity = String(0.92 + (0.08 * p));
 
-    if (Math.abs(drag.dx) > 36) showBadge("PRÓXIMO");
+    if (drag.dx > 36) showBadge("PRÓXIMO");
+    else if (drag.dx < -36) showBadge("PRÓXIMO");
     else hideBadge();
   };
 
@@ -216,6 +223,8 @@
   if (btnProject) btnProject.addEventListener("click", openProject);
   if (btnSuper) btnSuper.addEventListener("click", () => openModal(modalContact));
   if (btnProfile) btnProfile.addEventListener("click", () => openModal(modalProfile));
+
+  front.addEventListener("dblclick", openProject);
 
   sync();
 })();
