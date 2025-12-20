@@ -1,82 +1,30 @@
-(() => {
-  const $ = (q) => document.querySelector(q);
+(function () {
+  const modal = document.getElementById("modal");
+  const modalTitle = document.getElementById("modalTitle");
 
-  const btnMenu = $("#btnMenu");
-  const nav = $("#nav");
-
-  const modalContact = $("#modalContact");
-  const btnProblem = $("#btnProblem");
-  const btnContact2 = $("#btnContact2");
-
-  const modalProject = $("#modalProject");
-  const mTitle = $("#mTitle");
-  const mSub = $("#mSub");
-  const mText = $("#mText");
-  const mDemo = $("#mDemo");
-
-  const year = $("#year");
-  if (year) year.textContent = String(new Date().getFullYear());
-
-  const openModal = (m) => {
-    if (!m) return;
-    m.classList.add("is-open");
-    m.setAttribute("aria-hidden", "false");
-  };
-
-  const closeModal = (m) => {
-    if (!m) return;
-    m.classList.remove("is-open");
-    m.setAttribute("aria-hidden", "true");
-  };
-
-  // MENU MOBILE
-  const toggleMenu = () => {
-    const open = nav.classList.toggle("is-open");
-    btnMenu.setAttribute("aria-expanded", open ? "true" : "false");
-  };
-
-  if (btnMenu && nav) {
-    btnMenu.addEventListener("click", toggleMenu);
-    nav.addEventListener("click", (e) => {
-      const a = e.target.closest("a");
-      if (!a) return;
-      nav.classList.remove("is-open");
-      btnMenu.setAttribute("aria-expanded", "false");
-    });
+  function openModal(title) {
+    modal.classList.add("is-open");
+    modalTitle.textContent = title;
   }
 
-  // CONTATO
-  if (btnProblem) btnProblem.addEventListener("click", () => openModal(modalContact));
-  if (btnContact2) btnContact2.addEventListener("click", () => openModal(modalContact));
+  function closeModal() {
+    modal.classList.remove("is-open");
+  }
 
-  // ABRIR MODAL PROJETO (cards + bloco da esquerda)
-  const projects = window.PORTFOLIO_PROJECTS || {};
-
-  const openProject = (key) => {
-    const p = projects[key];
-    if (!p) return;
-    if (mTitle) mTitle.textContent = p.title || "";
-    if (mSub) mSub.textContent = p.sub || "";
-    if (mText) mText.textContent = p.description || "";
-    if (mDemo) mDemo.href = p.demoUrl || "#";
-    openModal(modalProject);
-  };
+  const services = document.querySelectorAll(".service");
+  services.forEach((item) => {
+    item.addEventListener("click", () => {
+      const title = item.getAttribute("data-title") || "Projeto";
+      openModal(title);
+    });
+  });
 
   document.addEventListener("click", (e) => {
-    const closeKey = e.target?.getAttribute?.("data-close");
-    if (closeKey === "c") closeModal(modalContact);
-    if (closeKey === "p") closeModal(modalProject);
-
-    const openKey = e.target?.closest?.("[data-open]")?.getAttribute?.("data-open");
-    if (openKey) openProject(openKey);
+    const t = e.target;
+    if (t && t.dataset && t.dataset.close === "1") closeModal();
   });
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      closeModal(modalContact);
-      closeModal(modalProject);
-      nav?.classList?.remove("is-open");
-      btnMenu?.setAttribute?.("aria-expanded", "false");
-    }
+    if (e.key === "Escape") closeModal();
   });
 })();
